@@ -1,135 +1,113 @@
-# RobEn Student Activity - Software & AI Developer Projects
+# Shape Recognition using OpenCV
 
-Welcome to the repository of RobEn Student Activity, where we showcase various projects in robotics, AI, and software development. I, **Mahmoud Hany**, have been working as a **Software and AI Developer** at RobEn since March 2021. This repository includes a wide range of projects that I have contributed to, spanning multiple disciplines including **image processing**, **machine learning**, **computer vision**, **robotics**, and **AI systems** used in real-world applications like **Remotely Operated Vehicles (ROVs)** and **Unmanned Aerial Vehicles (UAVs)**.
+This project utilizes **OpenCV** to recognize and classify basic shapes in an image. It identifies **Triangles**, **Rectangles**, **Circles**, and **Lines** by detecting and analyzing the contours of the shapes. The project counts the number of each shape present in the image and visualizes the results by drawing the contours and labeling them accordingly.
+
+---
 
 ## Table of Contents
 
-1. [About RobEn](#about-roben)
-2. [Key Contributions](#key-contributions)
-3. [Project Overview](#project-overview)
-   - [ROV (Remotely Operated Vehicle)](#rov)
-   - [UAV (Unmanned Aerial Vehicle)](#uav)
-   - [Electric Cars](#electric-cars)
-4. [Technologies & Tools](#technologies-tools)
-5. [Competitions & Achievements](#competitions-achievements)
-6. [Connect with Us](#connect-with-us)
+1. [Overview](#overview)
+2. [Installation](#installation)
+3. [How It Works](#how-it-works)
+4. [Running the Project](#running-the-project)
+5. [Technologies Used](#technologies-used)
+6. [License](#license)
 
 ---
 
-## About RobEn
-RobEn (Robotics Entrepreneurs) is a student-led activity at the **Arab Academy for Science, Technology, and Maritime Transport (AASTMT)**, focused on applying engineering and software solutions in the fields of robotics, AI, and automation. RobEn brings together students and professionals in various engineering fields to build innovative projects and compete in international and national competitions.
+## Overview
+
+This project demonstrates shape recognition using **OpenCV's** contour detection and approximation algorithms. It can detect the following shapes:
+
+- **Triangle**: A shape with 3 vertices.
+- **Rectangle**: A shape with 4 vertices.
+- **Circle**: A shape with more than 5 vertices.
+- **Line**: A shape with 2 vertices.
+
+### Key Features:
+
+- Detects basic shapes in a grayscale image.
+- Classifies shapes as **Triangle**, **Rectangle**, **Circle**, or **Line**.
+- Counts the number of each shape in the image.
+- Visualizes the results by drawing contours and labeling the detected shapes.
+- Displays the shape counts on the image.
 
 ---
 
-## Key Contributions
+## Installation
 
-- **Software and AI Development**: As a member of the Software & AI team, I contributed to the development of **machine learning** models, **image processing** algorithms, and **computer vision** systems for various robotic applications.
-  
-- **Project Development**: Worked extensively with **Python**, **C++**, and **TensorFlow** to design and implement solutions for real-time robotic systems like ROVs and UAVs. 
+To run this project, you need to install the necessary Python libraries:
 
-- **Team Building**: Interviewed and recruited 20 core team members from a pool of 71 candidates, helping to strengthen the technical team and expand its capabilities.
+- **OpenCV**: For image processing and contour detection.
+- **NumPy**: For numerical operations.
 
-- **Competitions**: Contributed to the success of our participation in multiple **international** and **national competitions**, including the **Mate ROV competition**, **Military UAV competition**, and the **Egyptian Collegiate Programming Contest (ECPC)**.
+You can install them with the following commands:
 
----
-
-## Project Overview
-
-This repository will include various projects that were developed as part of RobEn's initiatives, each focused on solving real-world challenges through robotics and AI.
-
-### ROV (Remotely Operated Vehicle)
-
-**Description**:  
-The ROV team designs and manufactures unmanned water exploration and light work-class vehicles. These ROVs are used in underwater robotics competitions and real-world applications. Our Software & AI team is responsible for creating **image recognition systems** for object detection and tracking using advanced computer vision techniques.
-
-**Key Technologies Used**:
-- **OpenCV** (for image processing)
-- **TensorFlow** (for machine learning and model training)
-- **C++** (for control systems)
-
-**Competitions**:
-- **Underwater Robotics Competition (UWRC)** - International
-- **Mate ROV Competition** - National (held at AASTMT Abu Qir)
+```bash
+pip install opencv-python numpy
+```
 
 ---
 
-### UAV (Unmanned Aerial Vehicle)
+## How It Works
 
-**Description**:  
-Our UAV team specializes in designing and building **multicopter drones** and **fixed-wing aircraft**. We focus on autonomous flight systems, airframe design, and ensuring that the vehicles meet the strict requirements of various competitions. The **Software & AI team** supports the UAV team by building the custom **autonomous flight systems** and **AI-based control algorithms**.
+1. **Image Loading**:
+   - The input image (`5.jpg`) is read in grayscale, while another image (`imgg.JPG`) is used for display purposes.
+   - The images are resized to a fixed dimension for uniformity.
 
-**Key Technologies Used**:
-- **Autonomous flight control systems**
-- **Computer Vision** for object detection and obstacle avoidance
-- **Custom AI algorithms** for flight stabilization and mission execution
+2. **Thresholding**:
+   - The grayscale image is thresholded to create a binary image that isolates the shapes. The threshold value is set to 140.
 
-**Competitions**:
-- **UAVC Competition** - International, Military Technical College
-- **Military UAV Competition** - National
+3. **Contour Detection**:
+   - **`cv2.findContours`** is used to find contours in the binary image. These contours represent the boundaries of the shapes.
 
----
+4. **Shape Classification**:
+   - The contours are approximated using **`cv2.approxPolyDP`**. Based on the number of vertices, shapes are classified as:
+     - **Triangle**: 3 vertices
+     - **Rectangle**: 4 vertices
+     - **Circle**: More than 5 vertices
+     - **Line**: 2 vertices
 
-### Electric Cars
+5. **Visualization**:
+   - The project draws contours around the shapes and places labels (such as "Triangle", "Rectangle", etc.) next to the shapes.
+   - The total count of each type of shape is also displayed on the image.
 
-**Description**:  
-The Electric Cars team is responsible for designing **environmentally friendly**, **cost-effective**, and **high-performance racing vehicles**. These vehicles are built for **electric racing** competitions. The team works on **electric powertrains**, **aerodynamics**, and **energy efficiency**. We also contribute to the software components involved in telemetry, data collection, and autonomous driving systems.
-
-**Key Technologies Used**:
-- **Electric Vehicle Design**
-- **Energy Management Systems**
-- **CFD and Aerodynamic Simulations**
-
-**Competitions**:
-- **Ever Competition 2022** - Sharm el Sheikh
+6. **Output**:
+   - The processed image with shapes and labels is displayed in one window.
+   - The count of each shape is displayed in a second window, both in the terminal and on the image itself.
 
 ---
 
-## Technologies & Tools
+## Running the Project
 
-This repository contains projects built using a wide variety of **technologies**, **programming languages**, and **tools**, some of which are mentioned below:
+1. **Prepare Your Files**:
+   - Ensure you have the following files in the specified locations:
+     - `5.jpg`: The input image that contains the shapes.
+     - `imgg.JPG`: The image used for displaying shape counts.
 
-- **Languages**:  
-  - Python, C++, Java, JavaScript, HTML, CSS, Go, Kotlin, Shell Scripting
-  - Libraries/Frameworks: TensorFlow, OpenCV, Keras, PyTorch, NumPy, Flask, Django
+2. **Run the Script**:
+   - Execute the Python script using the following command:
 
-- **Tools**:  
-  - **Git**, **GitHub** for version control and collaboration
-  - **Docker** for containerization
-  - **Unity** for simulation and testing (UAV, ROV)
-  - **Google Cloud**, **Heroku**, **Netlify** for hosting and deployment
+     ```bash
+     python main.py
+     ```
 
-- **Operating Systems**:  
-  - Windows, Ubuntu, Arch Linux, Android
+3. **View Results**:
+   - The processed image with contours and shape labels will appear in a window called **"img"**.
+   - The shape counts will be displayed in a second window called **"imgg"**.
 
----
-
-## Competitions & Achievements
-
-- **Mate ROV Competition** - National
-- **Military UAV Competition** - National
-- **UAVC** - International
-- **Underwater Robotics Competition (UWRC)** - International
-- **Egyptian Collegiate Programming Contest (ECPC)** - Yearly participation
+4. **Output**:
+   - The number of each detected shape is displayed both on the image and printed in the terminal.
 
 ---
 
-## Connect with Us
+## Technologies Used
 
-We are always open to collaboration, mentorship, and opportunities to work on innovative projects.
-
-- [GitHub](https://github.com/RobEn-AAST)
-- [LinkedIn](https://www.linkedin.com/company/roben)
-- [Instagram](https://www.instagram.com/roben_aast/)
-- [Facebook](https://www.facebook.com/RobEn.aast)
-
----
-
-## Contribution Guidelines
-
-We welcome contributions to all of our projects! If you would like to contribute, please fork the repository, create a branch, make your changes, and submit a pull request. 
+- **OpenCV**: For image processing, contour detection, and drawing shapes.
+- **NumPy**: For handling numerical operations on the image arrays.
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
