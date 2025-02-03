@@ -76,7 +76,7 @@ To generate the dataset, follow these steps:
    Run the script using the following command:
 
 ```bash
-python dataset_generator.py
+python dataset_make.py
 ```
 
 This will generate the dataset with the desired number of images and labels.
@@ -85,7 +85,7 @@ This will generate the dataset with the desired number of images and labels.
    You can also run the renaming script for flag images located in the `flags` directory. This will rename all `.png` files alphabetically:
 
 ```bash
-python rename_flags.py
+python rename.py
 ```
 
 ---
