@@ -1,132 +1,106 @@
-# RobEn Student Activity - Software & AI Developer Projects
+# Shape Detection with Template Matching using OpenCV
 
-Welcome to the repository of RobEn Student Activity, where we showcase various projects in robotics, AI, and software development. I, **Mahmoud Hany**, have been working as a **Software and AI Developer** at RobEn since March 2021. This repository includes a wide range of projects that I have contributed to, spanning multiple disciplines including **image processing**, **machine learning**, **computer vision**, **robotics**, and **AI systems** used in real-world applications like **Remotely Operated Vehicles (ROVs)** and **Unmanned Aerial Vehicles (UAVs)**.
+This project demonstrates how to use **template matching** with OpenCV to detect specific objects or patterns in an image. The code matches predefined templates (images of objects) to a target image and highlights the locations where the templates are found. It then counts how many times each template appears in the image and outputs the result.
+
+The project is particularly useful for applications where predefined patterns or objects need to be identified within a larger image, such as in image processing, quality control, or object recognition tasks.
 
 ## Table of Contents
 
-1. [About RobEn](#about-roben)
-2. [Key Contributions](#key-contributions)
-3. [Project Overview](#project-overview)
-   - [ROV (Remotely Operated Vehicle)](#rov)
-   - [UAV (Unmanned Aerial Vehicle)](#uav)
-   - [Electric Cars](#electric-cars)
-4. [Technologies & Tools](#technologies-tools)
-5. [Competitions & Achievements](#competitions-achievements)
-6. [Connect with Us](#connect-with-us)
+1. [Overview](#overview)
+2. [Installation](#installation)
+3. [How It Works](#how-it-works)
+4. [Running the Project](#running-the-project)
+5. [Technologies Used](#technologies-used)
+6. [License](#license)
 
 ---
 
-## About RobEn
-RobEn (Robotics Entrepreneurs) is a student-led activity at the **Arab Academy for Science, Technology, and Maritime Transport (AASTMT)**, focused on applying engineering and software solutions in the fields of robotics, AI, and automation. RobEn brings together students and professionals in various engineering fields to build innovative projects and compete in international and national competitions.
+## Overview
+
+This script uses **OpenCV**'s **`matchTemplate`** function to perform template matching. It compares a predefined template image with a target image and finds areas that match the template. The code works with multiple templates, detects all occurrences of each template, counts how many times each template appears, and draws rectangles around the detected objects.
+
+The project works with grayscale images and uses the **`cv.TM_CCOEFF_NORMED`** method for template matching. When the match exceeds a set threshold, it identifies the object and draws a red rectangle around it.
 
 ---
 
-## Key Contributions
+## Installation
 
-- **Software and AI Development**: As a member of the Software & AI team, I contributed to the development of **machine learning** models, **image processing** algorithms, and **computer vision** systems for various robotic applications.
-  
-- **Project Development**: Worked extensively with **Python**, **C++**, and **TensorFlow** to design and implement solutions for real-time robotic systems like ROVs and UAVs. 
+Before running the project, ensure you have the required libraries installed:
 
-- **Team Building**: Interviewed and recruited 20 core team members from a pool of 71 candidates, helping to strengthen the technical team and expand its capabilities.
+- **OpenCV**: For handling image processing and template matching.
+- **NumPy**: For numerical operations on images.
+- **Matplotlib**: For displaying images (optional, if you want to visualize the results directly).
 
-- **Competitions**: Contributed to the success of our participation in multiple **international** and **national competitions**, including the **Mate ROV competition**, **Military UAV competition**, and the **Egyptian Collegiate Programming Contest (ECPC)**.
+You can install the required libraries using `pip`:
 
----
-
-## Project Overview
-
-This repository will include various projects that were developed as part of RobEn's initiatives, each focused on solving real-world challenges through robotics and AI.
-
-### ROV (Remotely Operated Vehicle)
-
-**Description**:  
-The ROV team designs and manufactures unmanned water exploration and light work-class vehicles. These ROVs are used in underwater robotics competitions and real-world applications. Our Software & AI team is responsible for creating **image recognition systems** for object detection and tracking using advanced computer vision techniques.
-
-**Key Technologies Used**:
-- **OpenCV** (for image processing)
-- **TensorFlow** (for machine learning and model training)
-- **C++** (for control systems)
-
-**Competitions**:
-- **Underwater Robotics Competition (UWRC)** - International
-- **Mate ROV Competition** - National (held at AASTMT Abu Qir)
+```bash
+pip install opencv-python numpy matplotlib
+```
 
 ---
 
-### UAV (Unmanned Aerial Vehicle)
+## How It Works
 
-**Description**:  
-Our UAV team specializes in designing and building **multicopter drones** and **fixed-wing aircraft**. We focus on autonomous flight systems, airframe design, and ensuring that the vehicles meet the strict requirements of various competitions. The **Software & AI team** supports the UAV team by building the custom **autonomous flight systems** and **AI-based control algorithms**.
+1. **Loading Images**:
+   - The script loads a target image (`img.jpg`) and several template images (`cr.jpg`, `rec.jpg`, `tr.jpg`, `line.jpg`) using OpenCV's **`imread`** function. These templates represent the objects you want to detect.
 
-**Key Technologies Used**:
-- **Autonomous flight control systems**
-- **Computer Vision** for object detection and obstacle avoidance
-- **Custom AI algorithms** for flight stabilization and mission execution
+2. **Template Matching**:
+   - The **`matchTemplate`** function compares each template image with the target image using the **`cv.TM_CCOEFF_NORMED`** method, which computes a normalized correlation score between the template and each part of the target image.
 
-**Competitions**:
-- **UAVC Competition** - International, Military Technical College
-- **Military UAV Competition** - National
+3. **Thresholding**:
+   - A threshold is set at `0.98`. Only regions of the target image that have a matching score greater than or equal to this threshold are considered as a match for the template.
 
----
+4. **Counting Matches**:
+   - The script counts how many times each template is detected by checking the locations where the score exceeds the threshold. The `zip(*loc[::-1])` function is used to iterate over these matching locations.
 
-### Electric Cars
+5. **Drawing Rectangles**:
+   - The code draws red rectangles around the detected objects in the target image using **`cv.rectangle`** to visually highlight the regions where the templates match.
 
-**Description**:  
-The Electric Cars team is responsible for designing **environmentally friendly**, **cost-effective**, and **high-performance racing vehicles**. These vehicles are built for **electric racing** competitions. The team works on **electric powertrains**, **aerodynamics**, and **energy efficiency**. We also contribute to the software components involved in telemetry, data collection, and autonomous driving systems.
+6. **Saving Results**:
+   - The processed image with rectangles drawn around detected objects is saved as `res.png`.
 
-**Key Technologies Used**:
-- **Electric Vehicle Design**
-- **Energy Management Systems**
-- **CFD and Aerodynamic Simulations**
-
-**Competitions**:
-- **Ever Competition 2022** - Sharm el Sheikh
+7. **Displaying Results**:
+   - The script prints the count of detected objects for each template (cr, rec, tr, line) in the console.
 
 ---
 
-## Technologies & Tools
+## Running the Project
 
-This repository contains projects built using a wide variety of **technologies**, **programming languages**, and **tools**, some of which are mentioned below:
+1. **Prepare Your Files**:
+   Ensure you have the following files in the specified paths:
 
-- **Languages**:  
-  - Python, C++, Java, JavaScript, HTML, CSS, Go, Kotlin, Shell Scripting
-  - Libraries/Frameworks: TensorFlow, OpenCV, Keras, PyTorch, NumPy, Flask, Django
+   - `img.jpg`: The target image where object detection will be performed.
+   - `cr.jpg`, `rec.jpg`, `tr.jpg`, `line.jpg`: The template images representing the objects to detect.
+   
+   You can replace these files with your own images, but ensure the paths are updated accordingly in the script.
 
-- **Tools**:  
-  - **Git**, **GitHub** for version control and collaboration
-  - **Docker** for containerization
-  - **Unity** for simulation and testing (UAV, ROV)
-  - **Google Cloud**, **Heroku**, **Netlify** for hosting and deployment
+2. **Run the Script**:
+   After preparing the files, you can run the script using:
 
-- **Operating Systems**:  
-  - Windows, Ubuntu, Arch Linux, Android
+   ```bash
+   python main.py
+   ```
 
----
+3. **View Results**:
+   - The processed image will be saved as `res.png` in the working directory.
+   - The terminal will print the count of detected objects for each template, like so:
 
-## Competitions & Achievements
+     ```
+     5
+     3
+     2
+     4
+     ```
 
-- **Mate ROV Competition** - National
-- **Military UAV Competition** - National
-- **UAVC** - International
-- **Underwater Robotics Competition (UWRC)** - International
-- **Egyptian Collegiate Programming Contest (ECPC)** - Yearly participation
-
----
-
-## Connect with Us
-
-We are always open to collaboration, mentorship, and opportunities to work on innovative projects.
-
-- [GitHub](https://github.com/RobEn-AAST)
-- [LinkedIn](https://www.linkedin.com/company/roben)
-- [Instagram](https://www.instagram.com/roben_aast/)
-- [Facebook](https://www.facebook.com/RobEn.aast)
+   This means the template `cr.jpg` was found 5 times, `rec.jpg` was found 3 times, and so on.
 
 ---
 
-## Contribution Guidelines
+## Technologies Used
 
-We welcome contributions to all of our projects! If you would like to contribute, please fork the repository, create a branch, make your changes, and submit a pull request. 
+- **OpenCV**: For image processing, template matching, and drawing rectangles around detected objects.
+- **NumPy**: For handling array manipulations and image operations.
+- **Matplotlib (optional)**: For visualizing images in the notebook or console.
 
 ---
 
