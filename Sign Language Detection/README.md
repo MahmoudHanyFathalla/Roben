@@ -60,7 +60,7 @@ You must have a pre-trained model (`model.h5`) to run this project. Ensure that 
 2. **Run the Script**: Execute the Python script:
 
 ```bash
-python sign_language_detection.py
+python main.py
 ```
 
 3. **View the Output**: The program will start the webcam and display the video feed with predictions in real-time. The predicted class (sign language gesture) will appear in the top-left corner.
