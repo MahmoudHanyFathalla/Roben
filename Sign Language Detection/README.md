@@ -1,132 +1,92 @@
-# RobEn Student Activity - Software & AI Developer Projects
+# Sign Language Detection using TensorFlow and OpenCV
 
-Welcome to the repository of RobEn Student Activity, where we showcase various projects in robotics, AI, and software development. I, **Mahmoud Hany**, have been working as a **Software and AI Developer** at RobEn since March 2021. This repository includes a wide range of projects that I have contributed to, spanning multiple disciplines including **image processing**, **machine learning**, **computer vision**, **robotics**, and **AI systems** used in real-world applications like **Remotely Operated Vehicles (ROVs)** and **Unmanned Aerial Vehicles (UAVs)**.
+This project uses a pre-trained deep learning model to detect and classify **sign language gestures** from live video input using **OpenCV** and **TensorFlow**. The model predicts the sign language gesture from a frame captured by the laptop camera and displays the corresponding class label in real-time.
 
 ## Table of Contents
 
-1. [About RobEn](#about-roben)
-2. [Key Contributions](#key-contributions)
-3. [Project Overview](#project-overview)
-   - [ROV (Remotely Operated Vehicle)](#rov)
-   - [UAV (Unmanned Aerial Vehicle)](#uav)
-   - [Electric Cars](#electric-cars)
-4. [Technologies & Tools](#technologies-tools)
-5. [Competitions & Achievements](#competitions-achievements)
-6. [Connect with Us](#connect-with-us)
+1. [Overview](#overview)
+2. [Installation](#installation)
+3. [How It Works](#how-it-works)
+4. [Usage](#usage)
+5. [Technologies Used](#technologies-used)
+6. [Model Information](#model-information)
+7. [License](#license)
 
 ---
 
-## About RobEn
-RobEn (Robotics Entrepreneurs) is a student-led activity at the **Arab Academy for Science, Technology, and Maritime Transport (AASTMT)**, focused on applying engineering and software solutions in the fields of robotics, AI, and automation. RobEn brings together students and professionals in various engineering fields to build innovative projects and compete in international and national competitions.
+## Overview
+
+The **Sign Language Detection** project is designed to recognize hand gestures in sign language using a webcam feed. The pre-trained model processes each frame and outputs the predicted sign language class. The project leverages **OpenCV** for image capture and display, and **TensorFlow** for the model inference. This is a useful application in improving communication with hearing-impaired individuals by translating their hand gestures into text.
 
 ---
 
-## Key Contributions
+## Installation
 
-- **Software and AI Development**: As a member of the Software & AI team, I contributed to the development of **machine learning** models, **image processing** algorithms, and **computer vision** systems for various robotic applications.
-  
-- **Project Development**: Worked extensively with **Python**, **C++**, and **TensorFlow** to design and implement solutions for real-time robotic systems like ROVs and UAVs. 
+### 1. Prerequisites
 
-- **Team Building**: Interviewed and recruited 20 core team members from a pool of 71 candidates, helping to strengthen the technical team and expand its capabilities.
+Before running the project, make sure you have the following libraries installed:
 
-- **Competitions**: Contributed to the success of our participation in multiple **international** and **national competitions**, including the **Mate ROV competition**, **Military UAV competition**, and the **Egyptian Collegiate Programming Contest (ECPC)**.
+- **OpenCV**: For real-time video capture and image processing.
+- **TensorFlow**: For loading the pre-trained model and making predictions.
+- **NumPy**: For array manipulations.
 
----
+You can install the required dependencies using `pip`:
 
-## Project Overview
+```bash
+pip install opencv-python
+pip install tensorflow
+pip install numpy
+```
 
-This repository will include various projects that were developed as part of RobEn's initiatives, each focused on solving real-world challenges through robotics and AI.
+### 2. Pre-trained Model
 
-### ROV (Remotely Operated Vehicle)
-
-**Description**:  
-The ROV team designs and manufactures unmanned water exploration and light work-class vehicles. These ROVs are used in underwater robotics competitions and real-world applications. Our Software & AI team is responsible for creating **image recognition systems** for object detection and tracking using advanced computer vision techniques.
-
-**Key Technologies Used**:
-- **OpenCV** (for image processing)
-- **TensorFlow** (for machine learning and model training)
-- **C++** (for control systems)
-
-**Competitions**:
-- **Underwater Robotics Competition (UWRC)** - International
-- **Mate ROV Competition** - National (held at AASTMT Abu Qir)
+You must have a pre-trained model (`model.h5`) to run this project. Ensure that you have the model file in the correct directory or modify the path accordingly in the code.
 
 ---
 
-### UAV (Unmanned Aerial Vehicle)
+## How It Works
 
-**Description**:  
-Our UAV team specializes in designing and building **multicopter drones** and **fixed-wing aircraft**. We focus on autonomous flight systems, airframe design, and ensuring that the vehicles meet the strict requirements of various competitions. The **Software & AI team** supports the UAV team by building the custom **autonomous flight systems** and **AI-based control algorithms**.
-
-**Key Technologies Used**:
-- **Autonomous flight control systems**
-- **Computer Vision** for object detection and obstacle avoidance
-- **Custom AI algorithms** for flight stabilization and mission execution
-
-**Competitions**:
-- **UAVC Competition** - International, Military Technical College
-- **Military UAV Competition** - National
+1. **Capture Webcam Feed**: The program opens a connection to the laptop camera using OpenCV. Each frame from the webcam is captured and processed in real-time.
+2. **Preprocess Frame**: The frame is resized to the input size expected by the model (224x224 pixels), and the pixel values are normalized to range from 0 to 1.
+3. **Prediction**: The pre-trained model is used to predict the class label based on the processed frame.
+4. **Display Results**: The predicted class is displayed on the frame using OpenCV's `putText` function, and the frame is shown in a separate window.
+5. **Exit Condition**: The program will continue running until the user presses the 'q' key, at which point it will release the camera and close the OpenCV window.
 
 ---
 
-### Electric Cars
+## Usage
 
-**Description**:  
-The Electric Cars team is responsible for designing **environmentally friendly**, **cost-effective**, and **high-performance racing vehicles**. These vehicles are built for **electric racing** competitions. The team works on **electric powertrains**, **aerodynamics**, and **energy efficiency**. We also contribute to the software components involved in telemetry, data collection, and autonomous driving systems.
+1. **Place the model**: Ensure you have the pre-trained model (`model.h5`) in the correct directory (as specified in the code or modify the path accordingly).
+2. **Run the Script**: Execute the Python script:
 
-**Key Technologies Used**:
-- **Electric Vehicle Design**
-- **Energy Management Systems**
-- **CFD and Aerodynamic Simulations**
+```bash
+python sign_language_detection.py
+```
 
-**Competitions**:
-- **Ever Competition 2022** - Sharm el Sheikh
-
----
-
-## Technologies & Tools
-
-This repository contains projects built using a wide variety of **technologies**, **programming languages**, and **tools**, some of which are mentioned below:
-
-- **Languages**:  
-  - Python, C++, Java, JavaScript, HTML, CSS, Go, Kotlin, Shell Scripting
-  - Libraries/Frameworks: TensorFlow, OpenCV, Keras, PyTorch, NumPy, Flask, Django
-
-- **Tools**:  
-  - **Git**, **GitHub** for version control and collaboration
-  - **Docker** for containerization
-  - **Unity** for simulation and testing (UAV, ROV)
-  - **Google Cloud**, **Heroku**, **Netlify** for hosting and deployment
-
-- **Operating Systems**:  
-  - Windows, Ubuntu, Arch Linux, Android
+3. **View the Output**: The program will start the webcam and display the video feed with predictions in real-time. The predicted class (sign language gesture) will appear in the top-left corner.
+4. **Exit the Program**: Press the 'q' key to stop the detection and close the webcam window.
 
 ---
 
-## Competitions & Achievements
+## Technologies Used
 
-- **Mate ROV Competition** - National
-- **Military UAV Competition** - National
-- **UAVC** - International
-- **Underwater Robotics Competition (UWRC)** - International
-- **Egyptian Collegiate Programming Contest (ECPC)** - Yearly participation
-
----
-
-## Connect with Us
-
-We are always open to collaboration, mentorship, and opportunities to work on innovative projects.
-
-- [GitHub](https://github.com/RobEn-AAST)
-- [LinkedIn](https://www.linkedin.com/company/roben)
-- [Instagram](https://www.instagram.com/roben_aast/)
-- [Facebook](https://www.facebook.com/RobEn.aast)
+- **OpenCV**: 
+  - For capturing webcam frames.
+  - For real-time image processing and displaying results.
+- **TensorFlow**: 
+  - For loading the pre-trained model and making predictions.
+- **NumPy**: 
+  - For array manipulation and data preprocessing.
 
 ---
 
-## Contribution Guidelines
+## Model Information
 
-We welcome contributions to all of our projects! If you would like to contribute, please fork the repository, create a branch, make your changes, and submit a pull request. 
+- **Model Type**: Convolutional Neural Network (CNN)
+- **Input Size**: 224x224 pixels (RGB images)
+- **Output**: Predicted class of the hand gesture.
+
+This model was pre-trained on a dataset of sign language gestures and is capable of classifying the most common hand gestures. You can modify the code to use any custom-trained model by adjusting the input dimensions and class labels.
 
 ---
 
