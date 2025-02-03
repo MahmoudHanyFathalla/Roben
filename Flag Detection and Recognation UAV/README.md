@@ -1,135 +1,110 @@
-# RobEn Student Activity - Software & AI Developer Projects
+# QRCode Dataset Generation
 
-Welcome to the repository of RobEn Student Activity, where we showcase various projects in robotics, AI, and software development. I, **Mahmoud Hany**, have been working as a **Software and AI Developer** at RobEn since March 2021. This repository includes a wide range of projects that I have contributed to, spanning multiple disciplines including **image processing**, **machine learning**, **computer vision**, **robotics**, and **AI systems** used in real-world applications like **Remotely Operated Vehicles (ROVs)** and **Unmanned Aerial Vehicles (UAVs)**.
+This project generates a dataset of QR code images overlaid on various desert background images. The dataset consists of images and corresponding labels in **YOLO** format for training object detection models. It utilizes Python libraries such as **OpenCV**, **cvzone**, and **SciPy** to manipulate and create realistic images with QR codes placed in random positions and orientations.
 
 ## Table of Contents
 
-1. [About RobEn](#about-roben)
-2. [Key Contributions](#key-contributions)
-3. [Project Overview](#project-overview)
-   - [ROV (Remotely Operated Vehicle)](#rov)
-   - [UAV (Unmanned Aerial Vehicle)](#uav)
-   - [Electric Cars](#electric-cars)
-4. [Technologies & Tools](#technologies-tools)
-5. [Competitions & Achievements](#competitions-achievements)
-6. [Connect with Us](#connect-with-us)
+1. [Overview](#overview)
+2. [Installation](#installation)
+3. [How It Works](#how-it-works)
+4. [Dataset Generation](#dataset-generation)
+5. [Technologies Used](#technologies-used)
+6. [License](#license)
 
 ---
 
-## About RobEn
-RobEn (Robotics Entrepreneurs) is a student-led activity at the **Arab Academy for Science, Technology, and Maritime Transport (AASTMT)**, focused on applying engineering and software solutions in the fields of robotics, AI, and automation. RobEn brings together students and professionals in various engineering fields to build innovative projects and compete in international and national competitions.
+## Overview
+
+The goal of this project is to generate a dataset for object detection, specifically for detecting **QR codes** placed on desert images. The QR code image is randomly resized, rotated, and placed at a random position on different desert backgrounds. For each generated image, a corresponding label is saved in YOLO format, which contains the normalized bounding box coordinates of the QR code.
 
 ---
 
-## Key Contributions
+## Installation
 
-- **Software and AI Development**: As a member of the Software & AI team, I contributed to the development of **machine learning** models, **image processing** algorithms, and **computer vision** systems for various robotic applications.
-  
-- **Project Development**: Worked extensively with **Python**, **C++**, and **TensorFlow** to design and implement solutions for real-time robotic systems like ROVs and UAVs. 
+### 1. Prerequisites
 
-- **Team Building**: Interviewed and recruited 20 core team members from a pool of 71 candidates, helping to strengthen the technical team and expand its capabilities.
+Before running the project, make sure you have the following libraries installed:
 
-- **Competitions**: Contributed to the success of our participation in multiple **international** and **national competitions**, including the **Mate ROV competition**, **Military UAV competition**, and the **Egyptian Collegiate Programming Contest (ECPC)**.
+- **OpenCV**: For image manipulation and object detection.
+- **cvzone**: For overlaying images (QR code on background).
+- **SciPy**: For rotating the QR code.
+- **UUID**: For unique file naming.
 
----
+You can install the required dependencies using `pip`:
 
-## Project Overview
-
-This repository will include various projects that were developed as part of RobEn's initiatives, each focused on solving real-world challenges through robotics and AI.
-
-### ROV (Remotely Operated Vehicle)
-
-**Description**:  
-The ROV team designs and manufactures unmanned water exploration and light work-class vehicles. These ROVs are used in underwater robotics competitions and real-world applications. Our Software & AI team is responsible for creating **image recognition systems** for object detection and tracking using advanced computer vision techniques.
-
-**Key Technologies Used**:
-- **OpenCV** (for image processing)
-- **TensorFlow** (for machine learning and model training)
-- **C++** (for control systems)
-
-**Competitions**:
-- **Underwater Robotics Competition (UWRC)** - International
-- **Mate ROV Competition** - National (held at AASTMT Abu Qir)
+```bash
+pip install opencv-python
+pip install cvzone
+pip install scipy
+```
 
 ---
 
-### UAV (Unmanned Aerial Vehicle)
+## How It Works
 
-**Description**:  
-Our UAV team specializes in designing and building **multicopter drones** and **fixed-wing aircraft**. We focus on autonomous flight systems, airframe design, and ensuring that the vehicles meet the strict requirements of various competitions. The **Software & AI team** supports the UAV team by building the custom **autonomous flight systems** and **AI-based control algorithms**.
+1. **Prepare QR code and Desert Backgrounds**: 
+   - The QR code image (`qr.png`) is loaded into the program.
+   - A set of desert background images is loaded from a specified directory.
+   
+2. **Randomized Image Generation**: 
+   - The QR code is resized randomly.
+   - It is rotated by a random angle (0-360 degrees).
+   - The QR code is randomly positioned on the desert background.
+   
+3. **Bounding Box Calculation**: 
+   - For each generated image, the program calculates the normalized bounding box coordinates of the QR code, which are required for YOLO-based object detection models.
+   
+4. **Image and Label Saving**: 
+   - The final image (QR code overlaid on desert background) is saved in the output directory.
+   - A corresponding `.txt` label file is generated containing the normalized bounding box coordinates for YOLO training.
 
-**Key Technologies Used**:
-- **Autonomous flight control systems**
-- **Computer Vision** for object detection and obstacle avoidance
-- **Custom AI algorithms** for flight stabilization and mission execution
-
-**Competitions**:
-- **UAVC Competition** - International, Military Technical College
-- **Military UAV Competition** - National
-
----
-
-### Electric Cars
-
-**Description**:  
-The Electric Cars team is responsible for designing **environmentally friendly**, **cost-effective**, and **high-performance racing vehicles**. These vehicles are built for **electric racing** competitions. The team works on **electric powertrains**, **aerodynamics**, and **energy efficiency**. We also contribute to the software components involved in telemetry, data collection, and autonomous driving systems.
-
-**Key Technologies Used**:
-- **Electric Vehicle Design**
-- **Energy Management Systems**
-- **CFD and Aerodynamic Simulations**
-
-**Competitions**:
-- **Ever Competition 2022** - Sharm el Sheikh
+5. **File Renaming**: 
+   - The files in the flags directory are renamed alphabetically (from `a.png` to `z.png`), ensuring that the names are unique and consistent for labeling purposes.
 
 ---
 
-## Technologies & Tools
+## Dataset Generation
 
-This repository contains projects built using a wide variety of **technologies**, **programming languages**, and **tools**, some of which are mentioned below:
+To generate the dataset, follow these steps:
 
-- **Languages**:  
-  - Python, C++, Java, JavaScript, HTML, CSS, Go, Kotlin, Shell Scripting
-  - Libraries/Frameworks: TensorFlow, OpenCV, Keras, PyTorch, NumPy, Flask, Django
+1. **Set the Source and Output Directories**:
+   - **QR Code Image**: Place your QR code image (e.g., `qr.png`) in the specified path.
+   - **Desert Background Images**: Place the desert background images in the specified directory.
+   - **Output Directories**: The generated images will be saved to an output folder, and the corresponding label files will be saved to a separate folder.
+   
+2. **Running the Script**:
+   Run the script using the following command:
 
-- **Tools**:  
-  - **Git**, **GitHub** for version control and collaboration
-  - **Docker** for containerization
-  - **Unity** for simulation and testing (UAV, ROV)
-  - **Google Cloud**, **Heroku**, **Netlify** for hosting and deployment
+```bash
+python dataset_generator.py
+```
 
-- **Operating Systems**:  
-  - Windows, Ubuntu, Arch Linux, Android
+This will generate the dataset with the desired number of images and labels.
 
----
+3. **Renaming Flag Images**:
+   You can also run the renaming script for flag images located in the `flags` directory. This will rename all `.png` files alphabetically:
 
-## Competitions & Achievements
-
-- **Mate ROV Competition** - National
-- **Military UAV Competition** - National
-- **UAVC** - International
-- **Underwater Robotics Competition (UWRC)** - International
-- **Egyptian Collegiate Programming Contest (ECPC)** - Yearly participation
+```bash
+python rename_flags.py
+```
 
 ---
 
-## Connect with Us
+## Technologies Used
 
-We are always open to collaboration, mentorship, and opportunities to work on innovative projects.
-
-- [GitHub](https://github.com/RobEn-AAST)
-- [LinkedIn](https://www.linkedin.com/company/roben)
-- [Instagram](https://www.instagram.com/roben_aast/)
-- [Facebook](https://www.facebook.com/RobEn.aast)
-
----
-
-## Contribution Guidelines
-
-We welcome contributions to all of our projects! If you would like to contribute, please fork the repository, create a branch, make your changes, and submit a pull request. 
+- **OpenCV**: 
+  - For reading and manipulating images.
+  - For overlaying the QR code image on the desert background.
+- **cvzone**: 
+  - For overlaying the QR code image onto the desert background in a simple and efficient way.
+- **SciPy**: 
+  - For rotating the QR code image randomly to simulate realistic placement.
+- **UUID**: 
+  - For generating unique filenames for each image to ensure no overwriting of files.
 
 ---
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
