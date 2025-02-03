@@ -1,135 +1,100 @@
-# RobEn Student Activity - Software & AI Developer Projects
+# Multi-Camera Video Stream with Tkinter
 
-Welcome to the repository of RobEn Student Activity, where we showcase various projects in robotics, AI, and software development. I, **Mahmoud Hany**, have been working as a **Software and AI Developer** at RobEn since March 2021. This repository includes a wide range of projects that I have contributed to, spanning multiple disciplines including **image processing**, **machine learning**, **computer vision**, **robotics**, and **AI systems** used in real-world applications like **Remotely Operated Vehicles (ROVs)** and **Unmanned Aerial Vehicles (UAVs)**.
+This project demonstrates how to display live video streams from multiple cameras using the **Tkinter** GUI framework and **OpenCV**. The application captures video from three different cameras (USB or internal), displays the video frames in real-time, and rotates through the camera feeds to show them on a Tkinter-based interface. The program uses multithreading and queues to manage the video feeds and ensure smooth frame updates.
 
 ## Table of Contents
 
-1. [About RobEn](#about-roben)
-2. [Key Contributions](#key-contributions)
-3. [Project Overview](#project-overview)
-   - [ROV (Remotely Operated Vehicle)](#rov)
-   - [UAV (Unmanned Aerial Vehicle)](#uav)
-   - [Electric Cars](#electric-cars)
-4. [Technologies & Tools](#technologies-tools)
-5. [Competitions & Achievements](#competitions-achievements)
-6. [Connect with Us](#connect-with-us)
+1. [Overview](#overview)
+2. [Installation](#installation)
+3. [How It Works](#how-it-works)
+4. [Running the Project](#running-the-project)
+5. [Technologies Used](#technologies-used)
+6. [License](#license)
 
 ---
 
-## About RobEn
-RobEn (Robotics Entrepreneurs) is a student-led activity at the **Arab Academy for Science, Technology, and Maritime Transport (AASTMT)**, focused on applying engineering and software solutions in the fields of robotics, AI, and automation. RobEn brings together students and professionals in various engineering fields to build innovative projects and compete in international and national competitions.
+## Overview
+
+This project allows you to view live video feeds from three cameras simultaneously in a single window. It uses the **Tkinter** library for the graphical user interface and **OpenCV** to capture and display video streams from the connected cameras. Each camera feed is displayed in a separate section of the Tkinter window, and the program switches between cameras every frame to display the latest video feed.
+
+The program utilizes multithreading to manage the frames coming from multiple cameras, ensuring smooth video streaming without any delay or lag.
 
 ---
 
-## Key Contributions
+## Installation
 
-- **Software and AI Development**: As a member of the Software & AI team, I contributed to the development of **machine learning** models, **image processing** algorithms, and **computer vision** systems for various robotic applications.
+### 1. Prerequisites
+
+Before running the project, you need to install the following libraries:
+
+- **Tkinter**: The standard Python interface to the Tk GUI toolkit.
+- **Pillow (PIL)**: To handle image processing for displaying the video frames.
+- **OpenCV**: For capturing video from the cameras.
   
-- **Project Development**: Worked extensively with **Python**, **C++**, and **TensorFlow** to design and implement solutions for real-time robotic systems like ROVs and UAVs. 
+You can install the required libraries using `pip`:
 
-- **Team Building**: Interviewed and recruited 20 core team members from a pool of 71 candidates, helping to strengthen the technical team and expand its capabilities.
+```bash
+pip install opencv-python
+pip install pillow
+```
 
-- **Competitions**: Contributed to the success of our participation in multiple **international** and **national competitions**, including the **Mate ROV competition**, **Military UAV competition**, and the **Egyptian Collegiate Programming Contest (ECPC)**.
-
----
-
-## Project Overview
-
-This repository will include various projects that were developed as part of RobEn's initiatives, each focused on solving real-world challenges through robotics and AI.
-
-### ROV (Remotely Operated Vehicle)
-
-**Description**:  
-The ROV team designs and manufactures unmanned water exploration and light work-class vehicles. These ROVs are used in underwater robotics competitions and real-world applications. Our Software & AI team is responsible for creating **image recognition systems** for object detection and tracking using advanced computer vision techniques.
-
-**Key Technologies Used**:
-- **OpenCV** (for image processing)
-- **TensorFlow** (for machine learning and model training)
-- **C++** (for control systems)
-
-**Competitions**:
-- **Underwater Robotics Competition (UWRC)** - International
-- **Mate ROV Competition** - National (held at AASTMT Abu Qir)
+*Note: Tkinter is usually included by default in most Python installations. If not, you can install it using your package manager (for example, `sudo apt-get install python3-tk` on Linux).*
 
 ---
 
-### UAV (Unmanned Aerial Vehicle)
+## How It Works
 
-**Description**:  
-Our UAV team specializes in designing and building **multicopter drones** and **fixed-wing aircraft**. We focus on autonomous flight systems, airframe design, and ensuring that the vehicles meet the strict requirements of various competitions. The **Software & AI team** supports the UAV team by building the custom **autonomous flight systems** and **AI-based control algorithms**.
+1. **Capture Video Feeds**:
+   - The program uses **OpenCV** to capture video from three cameras (`camera_caps[0]`, `camera_caps[1]`, and `camera_caps[2]`).
+   - It retrieves frames continuously from the cameras and processes them to update the GUI.
 
-**Key Technologies Used**:
-- **Autonomous flight control systems**
-- **Computer Vision** for object detection and obstacle avoidance
-- **Custom AI algorithms** for flight stabilization and mission execution
+2. **Displaying Frames in Tkinter**:
+   - Each camera feed is displayed in its own `Label` widget within the Tkinter window.
+   - The frames are updated continuously by converting the frames from OpenCV into images that can be displayed using Tkinter.
 
-**Competitions**:
-- **UAVC Competition** - International, Military Technical College
-- **Military UAV Competition** - National
+3. **Multithreading**:
+   - The video capture loop runs on a single thread, but the GUI (Tkinter) is updated within the same loop using `win.update()` to avoid lag.
+   - The program cycles through the three camera feeds by switching between them in a round-robin fashion.
 
----
-
-### Electric Cars
-
-**Description**:  
-The Electric Cars team is responsible for designing **environmentally friendly**, **cost-effective**, and **high-performance racing vehicles**. These vehicles are built for **electric racing** competitions. The team works on **electric powertrains**, **aerodynamics**, and **energy efficiency**. We also contribute to the software components involved in telemetry, data collection, and autonomous driving systems.
-
-**Key Technologies Used**:
-- **Electric Vehicle Design**
-- **Energy Management Systems**
-- **CFD and Aerodynamic Simulations**
-
-**Competitions**:
-- **Ever Competition 2022** - Sharm el Sheikh
+4. **Error Handling**:
+   - If there’s an issue with any of the cameras (such as if one camera disconnects), the program will reset the corresponding camera.
 
 ---
 
-## Technologies & Tools
+## Running the Project
 
-This repository contains projects built using a wide variety of **technologies**, **programming languages**, and **tools**, some of which are mentioned below:
+1. **Prepare Your Cameras**:
+   Ensure that you have three cameras connected to your system. These can be USB webcams, internal webcams, or other compatible devices. The script assumes the default video devices (0, 1, and 2) for the cameras.
 
-- **Languages**:  
-  - Python, C++, Java, JavaScript, HTML, CSS, Go, Kotlin, Shell Scripting
-  - Libraries/Frameworks: TensorFlow, OpenCV, Keras, PyTorch, NumPy, Flask, Django
+2. **Running the Script**:
+   After the required libraries are installed, run the script using:
 
-- **Tools**:  
-  - **Git**, **GitHub** for version control and collaboration
-  - **Docker** for containerization
-  - **Unity** for simulation and testing (UAV, ROV)
-  - **Google Cloud**, **Heroku**, **Netlify** for hosting and deployment
+```bash
+python ROV_GUI.py
+```
 
-- **Operating Systems**:  
-  - Windows, Ubuntu, Arch Linux, Android
+This will open a Tkinter window displaying the live feeds from the cameras. Each feed will appear in a different position on the window, and the program will switch between them every frame.
 
 ---
 
-## Competitions & Achievements
+## Technologies Used
 
-- **Mate ROV Competition** - National
-- **Military UAV Competition** - National
-- **UAVC** - International
-- **Underwater Robotics Competition (UWRC)** - International
-- **Egyptian Collegiate Programming Contest (ECPC)** - Yearly participation
-
----
-
-## Connect with Us
-
-We are always open to collaboration, mentorship, and opportunities to work on innovative projects.
-
-- [GitHub](https://github.com/RobEn-AAST)
-- [LinkedIn](https://www.linkedin.com/company/roben)
-- [Instagram](https://www.instagram.com/roben_aast/)
-- [Facebook](https://www.facebook.com/RobEn.aast)
-
----
-
-## Contribution Guidelines
-
-We welcome contributions to all of our projects! If you would like to contribute, please fork the repository, create a branch, make your changes, and submit a pull request. 
+- **Tkinter**:
+  - Provides the graphical user interface (GUI) for displaying video frames from the cameras.
+- **OpenCV**:
+  - Used for capturing video from multiple cameras.
+  - Handles image conversion and processing to update the Tkinter interface.
+- **Pillow (PIL)**:
+  - Used to handle image conversion from OpenCV format to Tkinter format for display.
+- **Threading**:
+  - While not explicitly implemented here, the project structure could be enhanced with multithreading to manage camera feeds asynchronously.
 
 ---
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+---
+
+Feel free to modify the code to suit your needs, including handling more than three cameras or adding more advanced features like camera switching or frame rate adjustments.
